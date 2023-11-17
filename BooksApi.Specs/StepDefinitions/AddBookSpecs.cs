@@ -25,14 +25,14 @@ namespace BooksApi.Specs.StepDefinitions
 			bookRepository = webApplicationFactory.Services.GetRequiredService<IBookRepository>();
 		}
 
-		[Given(@"When the book with the same ISBN does not exist")]
+		[Given(@"when the book with the same ISBN does not exist")]
 		public async Task GivenWhenTheBookWithTheSameIsbnDoesNotExist()
 		{
 			var book = await this.bookRepository.GetBookAsync("12345");
 			book.Should().BeNull();
 		}
 
-		[When(@"A valid POST request is made")]
+		[When(@"a valid POST request is made")]
 		public async Task WhenAValidPostRequestIsMade() => addBookResponse = await client.PostAsync("books", expectedBook);
 
 		[Then(@"a ""([^""]*)"" status is returned")]

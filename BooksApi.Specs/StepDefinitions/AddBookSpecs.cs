@@ -16,7 +16,7 @@ namespace BooksApi.Specs.StepDefinitions
 		private readonly ApiTestClient client;
 		private readonly IBookRepository bookRepository;
 		private HttpResponseMessage addBookResponse;
-		private Book expectedBook = new() { Isbn = "12345" };
+		private readonly Book expectedBook = new() { Isbn = "12345" };
 
 		public AddBookSpecs(
 			CustomWebApplicationFactory webApplicationFactory)
@@ -24,8 +24,6 @@ namespace BooksApi.Specs.StepDefinitions
 			client = new ApiTestClient(webApplicationFactory.CreateClient());
 			bookRepository = webApplicationFactory.Services.GetRequiredService<IBookRepository>();
 		}
-
-
 
 		[Given(@"When the book with the same ISBN does not exist")]
 		public async Task GivenWhenTheBookWithTheSameIsbnDoesNotExist()

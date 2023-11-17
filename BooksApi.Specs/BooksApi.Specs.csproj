@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -19,6 +19,11 @@
     <Folder Include="Drivers\" />
     <Folder Include="Features\" />
     <Folder Include="Support\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Books.Api\Books.Api.csproj" />
+    <ProjectReference Include="..\BooksApi.Tests.Lib\BooksApi.Tests.Lib.csproj" />
   </ItemGroup>
 
 </Project>

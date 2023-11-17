@@ -4,6 +4,9 @@
 
 namespace Books.Api
 {
+	using Models;
+	using Repositories;
+
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -11,7 +14,8 @@ namespace Books.Api
 			var builder = WebApplication.CreateBuilder(args);
 			var app = builder.Build();
 
-			app.MapGet("/", () => "Hello World!");
+			app.MapPost("books",
+				(Book book, IBookRepository bookRepository) => Results.Created($"books/{book.Isbn}", null));
 
 			app.Run();
 		}

@@ -28,14 +28,14 @@ namespace BooksApi.Specs.StepDefinitions
 
 
 		[Given(@"When the book with the same ISBN does not exist")]
-		public async Task GivenWhenTheBookWithTheSameISBNDoesNotExist()
+		public async Task GivenWhenTheBookWithTheSameIsbnDoesNotExist()
 		{
 			var book = await this.bookRepository.GetBookAsync("12345");
 			book.Should().BeNull();
 		}
 
 		[When(@"A valid POST request is made")]
-		public async Task WhenAValidPOSTRequestIsMade() => addBookResponse = await client.PostAsync("books", expectedBook);
+		public async Task WhenAValidPostRequestIsMade() => addBookResponse = await client.PostAsync("books", expectedBook);
 
 		[Then(@"a ""([^""]*)"" status is returned")]
 		public void ThenAStatusIsReturned(string p0)

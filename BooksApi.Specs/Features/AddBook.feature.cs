@@ -119,6 +119,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.Then("a \"201 Created\" status is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 10
+ testRunner.Then("the location header will be set to the book\'s location", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 11
+ testRunner.Then("the book is in the response body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

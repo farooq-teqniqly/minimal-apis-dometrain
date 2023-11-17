@@ -42,6 +42,25 @@ namespace BooksApi.Specs.StepDefinitions
 			addBookResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 		}
 
+		[Then(@"the location header will be set to the book's location")]
+		public void ThenTheLocationHeaderWillBeSetToTheBooksLocation()
+		{
+			var locationHeader = addBookResponse.Headers.Location;
+
+			locationHeader.Should().NotBeNull();
+			locationHeader!.ToString().Should().EndWith($"books/{expectedBook.Isbn}");
+		}
+
+		[Then(@"the book is in the response body")]
+		public async Task ThenTheBookIsInTheResponseBody()
+		{
+			var book = await client.ReadFromJsonAsync<Book>(addBookResponse);
+			book.Should().NotBeNull();
+			book.Isbn.Should().Be(expectedBook.Isbn);
+		}
+
+
+
 		public void Dispose() => client.Dispose();
 	}
 }

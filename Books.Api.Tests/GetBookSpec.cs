@@ -46,8 +46,8 @@ namespace Books.Api.Tests
 		}
 
 		[Given(@"a book with the given isbn has been added")]
-		public void GivenABookWithTheGivenIsbnHasBeenAdded() =>
-			A.CallTo(() =>
+		public void GivenABookWithTheGivenIsbnHasBeenAdded()
+			=> A.CallTo(() =>
 				bookRepository.GetBookAsync(addedBook.Isbn)).Returns(Task.FromResult<Book?>(addedBook));
 
 		[When(@"a get request is made")]

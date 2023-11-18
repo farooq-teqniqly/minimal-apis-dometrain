@@ -9,5 +9,6 @@ namespace Books.Api.Repositories
 	public interface IBookRepository
 	{
 		Task<Book?> GetBookAsync(string isbn);
+		Task<bool> AddBookAsync(Book book);
 	}
 }

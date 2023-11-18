@@ -14,8 +14,9 @@ namespace Books.Api
 			var builder = WebApplication.CreateBuilder(args);
 			var app = builder.Build();
 
-			app.MapPost("books", (Book book) =>
+			app.MapPost("books", async (Book book, IBookRepository bookRepository) =>
 			{
+				var added = await bookRepository.AddBookAsync(book);
 				return Results.Created($"books/{book.Isbn}", book);
 			});
 

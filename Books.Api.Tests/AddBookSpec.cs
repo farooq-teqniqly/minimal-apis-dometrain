@@ -48,8 +48,10 @@ namespace Books.Api.Tests
 		}
 
 		[Given(@"a book with the given isbn does not exist")]
-		public void GivenABookWithTheGivenIsbnDoesNotExist() => A.CallTo(() =>
-			bookRepository.GetBookAsync(bookToAdd.Isbn)).Returns(Task.FromResult<Book?>(null));
+		public void GivenABookWithTheGivenIsbnDoesNotExist()
+		{
+			A.CallTo(() => bookRepository.AddBookAsync(bookToAdd)).Returns(true);
+		}
 
 		[When(@"a valid post request is made")]
 		public async Task WhenAValidPostRequestIsMade()

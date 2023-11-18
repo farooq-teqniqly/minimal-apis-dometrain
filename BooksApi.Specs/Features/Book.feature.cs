@@ -28,7 +28,7 @@ namespace BooksApi.Specs.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "AddBook.feature"
+#line 1 "Book.feature"
 #line hidden
         
         public AddBookFeature(AddBookFeature.FixtureData fixtureData, BooksApi_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)

@@ -36,7 +36,7 @@ namespace BooksApi.Specs.StepDefinitions
 		}
 
 		[Given(@"when the book with the same ISBN does not exist")]
-		public async Task GivenWhenTheBookWithTheSameIsbnDoesNotExist()
+		public void GivenWhenTheBookWithTheSameIsbnDoesNotExist()
 		{
 			var book = new Book { Isbn = "12345" };
 			A.CallTo(() => bookRepository.GetBookAsync(book.Isbn)).Returns(Task.FromResult<Book?>(null));

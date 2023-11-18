@@ -36,7 +36,7 @@ namespace BooksApi.Specs.StepDefinitions
 		}
 
 		[Given(@"an existing book")]
-		public async Task GivenAnExistingBook() => A.CallTo(() => bookRepository.GetBookAsync(lookupIsbn)).Returns(new Book() { Isbn = lookupIsbn });
+		public void GivenAnExistingBook() => A.CallTo(() => bookRepository.GetBookAsync(lookupIsbn)).Returns(new Book() { Isbn = lookupIsbn });
 
 		[When(@"a GET request is made for the book by isbn")]
 		public async Task WhenAGETRequestIsMadeForTheBookByIsbn()

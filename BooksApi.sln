@@ -3,12 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Api", "Books.Api\Books.Api.csproj", "{725EFE1F-7A2F-49C4-86CD-B4DAE42CF4C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Api.Tests", "Books.Api.Tests\Books.Api.Tests.csproj", "{FCAEDADB-FD29-4CAE-83CE-06630EB4365D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{468CAECF-48FB-4125-A184-C9CB0374C2F4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{725EFE1F-7A2F-49C4-86CD-B4DAE42CF4C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725EFE1F-7A2F-49C4-86CD-B4DAE42CF4C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725EFE1F-7A2F-49C4-86CD-B4DAE42CF4C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725EFE1F-7A2F-49C4-86CD-B4DAE42CF4C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCAEDADB-FD29-4CAE-83CE-06630EB4365D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCAEDADB-FD29-4CAE-83CE-06630EB4365D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCAEDADB-FD29-4CAE-83CE-06630EB4365D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCAEDADB-FD29-4CAE-83CE-06630EB4365D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93996112-37EA-4BB3-A89A-7D2D751370CD}
 	EndGlobalSection
 EndGlobal

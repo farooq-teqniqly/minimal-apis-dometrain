@@ -36,11 +36,7 @@ namespace BooksApi.Specs.StepDefinitions
 		}
 
 		[Given(@"an existing book")]
-		public async Task GivenAnExistingBook()
-		{
-			A.CallTo(() => bookRepository.GetBookAsync(lookupIsbn)).Returns(new Book() { Isbn = lookupIsbn });
-
-		}
+		public async Task GivenAnExistingBook() => A.CallTo(() => bookRepository.GetBookAsync(lookupIsbn)).Returns(new Book() { Isbn = lookupIsbn });
 
 		[When(@"a GET request is made for the book by isbn")]
 		public async Task WhenAGETRequestIsMadeForTheBookByIsbn()
@@ -50,10 +46,7 @@ namespace BooksApi.Specs.StepDefinitions
 		}
 
 		[Then(@"the a ""([^""]*)"" status is returned")]
-		public void ThenTheAStatusIsReturned(string p0)
-		{
-			response.StatusCode.Should().Be(HttpStatusCode.OK);
-		}
+		public void ThenTheAStatusIsReturned(string p0) => response.StatusCode.Should().Be(HttpStatusCode.OK);
 
 		[Then(@"the book is returned")]
 		public async Task ThenTheBookIsReturned()
@@ -62,6 +55,5 @@ namespace BooksApi.Specs.StepDefinitions
 			book.Should().NotBeNull();
 			book!.Isbn.Should().Be(lookupIsbn);
 		}
-
 	}
 }

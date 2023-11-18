@@ -9,3 +9,8 @@ Scenario: Adding a book
 	Then a "201 Created" status is returned
 	Then the location header will be set to the book's location
 	Then the book is in the response body
+
+Scenario: Retrieving a book 
+	Given an existing book
+	When a GET request is made for the book
+	Then the a "200 OK" status is returned

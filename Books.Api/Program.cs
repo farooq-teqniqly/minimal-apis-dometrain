@@ -5,6 +5,7 @@
 namespace Books.Api
 {
 	using Models;
+	using Repositories;
 
 	public class Program
 	{
@@ -13,8 +14,13 @@ namespace Books.Api
 			var builder = WebApplication.CreateBuilder(args);
 			var app = builder.Build();
 
+			app.MapGet("books/{id}", async (string id, IBookRepository bookRepository) =>
+			{
+				return Results.Ok();
+			});
+
 			app.MapPost("books",
-				(Book book) => Results.Created($"books/{book.Isbn}", book));
+				(Book book, IBookRepository bookRepository) => Results.Created($"books/{book.Isbn}", book));
 
 			app.Run();
 		}

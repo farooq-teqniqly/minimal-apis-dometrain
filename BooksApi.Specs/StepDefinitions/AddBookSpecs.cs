@@ -6,7 +6,10 @@ namespace BooksApi.Specs.StepDefinitions
 {
 	using Books.Api.Models;
 	using Books.Api.Repositories;
+	using FakeItEasy;
+	using Microsoft.AspNetCore.TestHost;
 	using Microsoft.Extensions.DependencyInjection;
+	using Microsoft.Extensions.DependencyInjection.Extensions;
 	using System.Net;
 	using Tests.Lib;
 
@@ -15,21 +18,28 @@ namespace BooksApi.Specs.StepDefinitions
 	{
 		private readonly ApiTestClient client;
 		private readonly IBookRepository bookRepository;
-		private HttpResponseMessage addBookResponse;
+		private HttpResponseMessage addBookResponse = default!;
 		private readonly Book expectedBook = new() { Isbn = "12345" };
 
 		public AddBookSpecs(
 			CustomWebApplicationFactory webApplicationFactory)
 		{
-			client = new ApiTestClient(webApplicationFactory.CreateClient());
-			bookRepository = webApplicationFactory.Services.GetRequiredService<IBookRepository>();
+			var customFactory = webApplicationFactory.WithWebHostBuilder(b =>
+				b.ConfigureTestServices(s =>
+				{
+					s.RemoveAll<IBookRepository>();
+					s.AddSingleton<IBookRepository>(_ => A.Fake<IBookRepository>());
+				}));
+
+			client = new ApiTestClient(customFactory.CreateClient());
+			bookRepository = customFactory.Services.GetRequiredService<IBookRepository>();
 		}
 
 		[Given(@"when the book with the same ISBN does not exist")]
 		public async Task GivenWhenTheBookWithTheSameIsbnDoesNotExist()
 		{
-			var book = await this.bookRepository.GetBookAsync("12345");
-			book.Should().BeNull();
+			var book = new Book { Isbn = "12345" };
+			A.CallTo(() => bookRepository.GetBookAsync(book.Isbn)).Returns(Task.FromResult<Book?>(null));
 		}
 
 		[When(@"a valid POST request is made")]
@@ -58,8 +68,6 @@ namespace BooksApi.Specs.StepDefinitions
 			book.Should().NotBeNull();
 			book.Isbn.Should().Be(expectedBook.Isbn);
 		}
-
-
 
 		public void Dispose() => client.Dispose();
 	}

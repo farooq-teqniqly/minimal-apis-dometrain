@@ -25,7 +25,7 @@ namespace Books.Api.Tests
 
 		public async Task<HttpResponseMessage> GetAsync(string endpoint) => await client.GetAsync(endpoint);
 
-		public async Task<T> ReadFromJsonAsync<T>(HttpResponseMessage response)
+		public static async Task<T> ReadFromJsonAsync<T>(HttpResponseMessage response)
 			=> await response.Content.ReadFromJsonAsync<T>()
 			   ?? throw new InvalidOperationException(
 				   $"Could not deserialize the result into the requested type {typeof(T)}");

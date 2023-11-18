@@ -4,6 +4,8 @@
 
 namespace Books.Api
 {
+	using Models;
+
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -11,7 +13,10 @@ namespace Books.Api
 			var builder = WebApplication.CreateBuilder(args);
 			var app = builder.Build();
 
-			app.MapGet("/", () => "Hello World!");
+			app.MapPost("books", (Book book) =>
+			{
+				return Results.Created($"books/{book.Isbn}", book);
+			});
 
 			app.Run();
 		}

@@ -6,7 +6,7 @@ namespace Books.Api.Tests
 {
 	using Microsoft.AspNetCore.Mvc.Testing;
 
-	internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
+	public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 	{
 	}
 }

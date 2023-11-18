@@ -12,6 +12,7 @@ namespace BooksApi.Specs.StepDefinitions
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.DependencyInjection.Extensions;
 	using System.Net;
+	using System.Net.Http.Json;
 
 	[Binding]
 	public class GetBookSpecs
@@ -41,8 +42,8 @@ namespace BooksApi.Specs.StepDefinitions
 
 		}
 
-		[When(@"a GET request is made for the book")]
-		public async Task WhenAGETRequestIsMadeForTheBook()
+		[When(@"a GET request is made for the book by isbn")]
+		public async Task WhenAGETRequestIsMadeForTheBookByIsbn()
 		{
 			response = await client.GetAsync($"books/{lookupIsbn}");
 			response.Should().NotBeNull();
@@ -53,5 +54,14 @@ namespace BooksApi.Specs.StepDefinitions
 		{
 			response.StatusCode.Should().Be(HttpStatusCode.OK);
 		}
+
+		[Then(@"the book is returned")]
+		public async Task ThenTheBookIsReturned()
+		{
+			var book = await response.Content.ReadFromJsonAsync<Book>();
+			book.Should().NotBeNull();
+			book!.Isbn.Should().Be(lookupIsbn);
+		}
+
 	}
 }

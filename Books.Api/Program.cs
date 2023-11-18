@@ -14,9 +14,10 @@ namespace Books.Api
 			var builder = WebApplication.CreateBuilder(args);
 			var app = builder.Build();
 
-			app.MapGet("books/{id}", async (string id, IBookRepository bookRepository) =>
+			app.MapGet("books/{isbn}", async (string isbn, IBookRepository bookRepository) =>
 			{
-				return Results.Ok();
+				var book = await bookRepository.GetBookAsync(isbn);
+				return Results.Ok(book);
 			});
 
 			app.MapPost("books",

@@ -12,5 +12,6 @@ Scenario: Adding a book
 
 Scenario: Retrieving a book 
 	Given an existing book
-	When a GET request is made for the book
+	When a GET request is made for the book by isbn
 	Then the a "200 OK" status is returned
+	Then the book is returned

@@ -19,7 +19,14 @@ namespace BooksApi.Specs.StepDefinitions
 		private readonly ApiTestClient client;
 		private readonly IBookRepository bookRepository;
 		private HttpResponseMessage addBookResponse = default!;
-		private readonly Book expectedBook = new() { Isbn = "12345" };
+		private readonly Book expectedBook = new()
+		{
+			Isbn = "123456",
+			Title = "A Clockwork Orange",
+			Author = "Anthony Burgess",
+			PageCount = 240,
+			ReleaseDate = new DateOnly(2019, 5, 21)
+		};
 
 		public AddBookSpecs(
 			CustomWebApplicationFactory webApplicationFactory)
@@ -66,7 +73,11 @@ namespace BooksApi.Specs.StepDefinitions
 		{
 			var book = await client.ReadFromJsonAsync<Book>(addBookResponse);
 			book.Should().NotBeNull();
-			book.Isbn.Should().Be(expectedBook.Isbn);
+			book!.Isbn.Should().Be(expectedBook.Isbn);
+			book.Title.Should().Be(expectedBook.Title);
+			book.Author.Should().Be(expectedBook.Author);
+			book.PageCount.Should().Be(expectedBook.PageCount);
+			book.ReleaseDate.Should().Be(expectedBook.ReleaseDate);
 		}
 
 		public void Dispose() => client.Dispose();

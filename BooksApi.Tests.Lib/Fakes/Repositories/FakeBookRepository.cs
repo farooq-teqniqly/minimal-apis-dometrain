@@ -10,6 +10,6 @@ namespace BooksApi.Tests.Lib.Fakes.Repositories
 
 	public class FakeBookRepository : IBookRepository
 	{
-		public Task<Book?> GetBookAsync(string isbn) => Task.FromResult(default(Book))!;
+		public Task<Book?> GetBookAsync(string isbn) => Task.FromResult(default(Book));
 	}
 }

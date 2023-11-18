@@ -19,8 +19,16 @@ namespace BooksApi.Specs.StepDefinitions
 	{
 		private readonly ApiTestClient client;
 		private readonly IBookRepository bookRepository;
-		private readonly string lookupIsbn = "12345";
 		private HttpResponseMessage response = default!;
+
+		private readonly Book expectedBook = new()
+		{
+			Isbn = "123456",
+			Title = "A Clockwork Orange",
+			Author = "Anthony Burgess",
+			PageCount = 240,
+			ReleaseDate = new DateOnly(2019, 5, 21)
+		};
 
 		public GetBookSpecs(CustomWebApplicationFactory webApplicationFactory)
 		{
@@ -36,12 +44,13 @@ namespace BooksApi.Specs.StepDefinitions
 		}
 
 		[Given(@"an existing book")]
-		public void GivenAnExistingBook() => A.CallTo(() => bookRepository.GetBookAsync(lookupIsbn)).Returns(new Book() { Isbn = lookupIsbn });
+		public void GivenAnExistingBook() => A.CallTo(() => bookRepository.GetBookAsync(expectedBook.Isbn)).Returns(
+			expectedBook);
 
 		[When(@"a GET request is made for the book by isbn")]
 		public async Task WhenAGETRequestIsMadeForTheBookByIsbn()
 		{
-			response = await client.GetAsync($"books/{lookupIsbn}");
+			response = await client.GetAsync($"books/{expectedBook.Isbn}");
 			response.Should().NotBeNull();
 		}
 
@@ -53,7 +62,11 @@ namespace BooksApi.Specs.StepDefinitions
 		{
 			var book = await response.Content.ReadFromJsonAsync<Book>();
 			book.Should().NotBeNull();
-			book!.Isbn.Should().Be(lookupIsbn);
+			book!.Isbn.Should().Be(expectedBook.Isbn);
+			book.Title.Should().Be(expectedBook.Title);
+			book.Author.Should().Be(expectedBook.Author);
+			book.PageCount.Should().Be(expectedBook.PageCount);
+			book.ReleaseDate.Should().Be(expectedBook.ReleaseDate);
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace BooksApi.Specs.StepDefinitions
 				b.ConfigureTestServices(s =>
 				{
 					s.RemoveAll<IBookRepository>();
-					s.AddSingleton<IBookRepository>(_ => A.Fake<IBookRepository>());
+					s.AddSingleton(_ => A.Fake<IBookRepository>());
 				}));
 
 			client = new ApiTestClient(customFactory.CreateClient());

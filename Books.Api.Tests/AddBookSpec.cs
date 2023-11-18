@@ -23,7 +23,7 @@ namespace Books.Api.Tests
 
 		private readonly Book bookToAdd = new()
 		{
-			Isbn = "123",
+			Isbn = "0393341763",
 			Title = "A Clockwork Orange",
 			Author = "Anthony Burgess",
 			PageCount = 240,

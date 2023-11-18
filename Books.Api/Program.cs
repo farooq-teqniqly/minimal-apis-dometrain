@@ -18,7 +18,8 @@ namespace Books.Api
 			{
 				var added = await bookRepository.AddBookAsync(book);
 				return Results.Created($"books/{book.Isbn}", book);
-			});
+			})
+				.WithParameterValidation();
 
 			app.MapGet("books/{isbn}", async (string isbn, IBookRepository bookRepository) =>
 			{

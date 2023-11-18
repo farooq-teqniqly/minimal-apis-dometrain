@@ -5,6 +5,7 @@
 namespace Books.Api
 {
 	using Models;
+	using Repositories;
 
 	public class Program
 	{
@@ -16,6 +17,12 @@ namespace Books.Api
 			app.MapPost("books", (Book book) =>
 			{
 				return Results.Created($"books/{book.Isbn}", book);
+			});
+
+			app.MapGet("books/{isbn}", async (string isbn, IBookRepository bookRepository) =>
+			{
+				var book = await bookRepository.GetBookAsync(isbn);
+				return Results.Ok(book);
 			});
 
 			app.Run();
